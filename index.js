@@ -28,16 +28,17 @@ const PORT = process.env.PORT || 4000
         })()
     })
 
-    slackEvents.on("message.im", (event) => {
+    slackEvents.on("message.app_home", (event) => {
         console.log(`Got message from user ${event.user}: ${event.text}`);
         (async() => {
             try {
                 let resp = await axios.get(`https://api.quotable.io/random`)
                 const quote = resp.data.content
                 const author = resp.data.author
-                await slackClient.chat.meMessage({
+                await slackClient.chat.postMessage({
                     channel: event.channel,
-                    text: `Hi <@${event.user}>! :tada: \n  Quote of the day: "${quote}" by ${author}`,
+                    channel_type: "app_home",
+                    text: `Hi <@${event.user}>! :tada: \n  Quote of the day: "${quote}" by ${author} `,
                 })
             } catch (error) {
                 console.log(error.data)
