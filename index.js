@@ -1,6 +1,8 @@
 require("dotenv").config()
 const axios = require("axios")
 const { App } = require("@slack/bolt")
+const { createEventAdapter } = require("@slack/events-api")
+
 const signingSecret = process.env["SLACK_SIGNING_SECRET"]
 const botToken = process.env["SLACK_BOT_TOKEN"]
 const app = new App({
