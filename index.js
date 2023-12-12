@@ -37,7 +37,7 @@ const PORT = process.env.PORT || 4000
                 const author = resp.data.author
                 await slackClient.chat.postMessage({
                     channel: event.channel,
-                    text: `Hi <@${event.user}>! :tada: \n  Quote of the day: "${quote}" by ${author} `,
+                    text: `Hi <@${event.user}>! :tada: \n  Quote of the day: "${quote}" by ${author}`,
                 })
             } catch (error) {
                 console.log(error.data)
