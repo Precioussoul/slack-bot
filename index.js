@@ -35,7 +35,7 @@ const PORT = process.env.PORT || 4000
                 let resp = await axios.get(`https://api.quotable.io/random`)
                 const quote = resp.data.content
                 const author = resp.data.author
-                await slackClient.chat.postMessage({
+                await slackClient.chat.meMessage({
                     channel: event.channel,
                     text: `Hi <@${event.user}>! :tada: \n  Quote of the day: "${quote}" by ${author}`,
                 })
