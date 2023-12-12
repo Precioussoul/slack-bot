@@ -34,6 +34,12 @@ const slackClient = new WebClient(botToken)
         })()
     })
 
+    slackEvents.on("error", console.error)
+
+    slackEvents.start(port).then(() => {
+        console.log(`Slack event started on port ${process.env.PORT || 4000}`)
+    })
+
     app.message("Quote of the day", async({ message, say }) => {
         let resp = await axios.get(`https://api.quotable.io/random`)
         const quote = resp.data.content
