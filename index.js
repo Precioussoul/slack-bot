@@ -17,8 +17,9 @@ const app = new App({
     // Listen for an event from the Events API
     app.event("app_home_opened", ({ event, say }) => {
         console.log(`Got message from user ${event.user}: ${event.text}`)
-        say(`Hello <@${event.user}>`)
+        say(`Hello <@${event.user}>, How is the day going :slightly_smiling_face:`)
     })
+
     app.event("app_mention", ({ event, say }) => {
         console.log(`Got message from user ${event.user}: ${event.text}`);
         (async() => {
