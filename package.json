@@ -12,8 +12,6 @@
     "license": "ISC",
     "dependencies": {
         "@slack/bolt": "^3.16.0",
-        "@slack/events-api": "^3.0.1",
-        "@slack/web-api": "^6.10.0",
         "@types/node": "^18.0.6",
         "axios": "^1.6.2",
         "dotenv": "^16.3.1",
