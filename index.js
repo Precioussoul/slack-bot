@@ -22,11 +22,10 @@ const app = new App({
   const rule = new schedule.RecurrenceRule()
   rule.dayOfWeek = 3
   rule.hour = 17
-  rule.minute = 5
+  rule.minute = 10
   rule.tz = "UTC+01:00"
 
   const job = schedule.scheduleJob(rule, async () => {
-    console.log("The answer to life, the universe, and everything!")
     try {
       let resp = await axios.get(`https://api.quotable.io/random`)
       const quote = resp.data.content
@@ -39,7 +38,7 @@ const app = new App({
     } catch (error) {}
   })
 
-  job()
+  job.invoke()
 
   // Listen for an event from the Events API
   app.event("app_home_opened", ({event, say}) => {
@@ -64,21 +63,21 @@ const app = new App({
     })()
   })
 
-  app.client.chat.app // Convenience method to listen to only `message` events using a string or RegExp
-    .message(/quote/i, ({event, say}) => {
-      ;(async () => {
-        try {
-          let resp = await axios.get(`https://api.quotable.io/random`)
-          const quote = resp.data.content
-          const author = resp.data.author
-          await say(
-            `Hi <@${event.user}>! :tada: \n  Quote of the day: "${quote}" by ${author} `
-          )
-        } catch (error) {
-          console.log(error.data)
-        }
-      })()
-    })
+  // Convenience method to listen to only `message` events using a string or RegExp
+  app.message(/quote/i, ({event, say}) => {
+    ;(async () => {
+      try {
+        let resp = await axios.get(`https://api.quotable.io/random`)
+        const quote = resp.data.content
+        const author = resp.data.author
+        await say(
+          `Hi <@${event.user}>! :tada: \n  Quote of the day: "${quote}" by ${author} `
+        )
+      } catch (error) {
+        console.log(error.data)
+      }
+    })()
+  })
 
   console.log("⚡️ Bolt app is running!")
 })()
