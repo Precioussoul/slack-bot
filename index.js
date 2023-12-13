@@ -22,7 +22,7 @@ const app = new App({
   const rule = new schedule.RecurrenceRule()
   rule.dayOfWeek = 3
   rule.hour = 17
-  rule.minute = 12
+  rule.minute = 13
   rule.tz = "UTC+01:00"
 
   const job = schedule.scheduleJob(rule, async () => {
