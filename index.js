@@ -22,7 +22,7 @@ const app = new App({
   const rule = new schedule.RecurrenceRule()
   rule.dayOfWeek = 3
   rule.hour = 17
-  rule.minute = 10
+  rule.minute = 12
   rule.tz = "UTC+01:00"
 
   const job = schedule.scheduleJob(rule, async () => {
@@ -35,10 +35,10 @@ const app = new App({
         channel: "#random",
         text: `Quote of the day: "${quote}" by ${author} `,
       })
-    } catch (error) {}
+    } catch (error) {
+      console.log("schedule error: " + error)
+    }
   })
-
-  job.invoke()
 
   // Listen for an event from the Events API
   app.event("app_home_opened", ({event, say}) => {
