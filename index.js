@@ -20,9 +20,9 @@ const app = new App({
   await app.start(process.env.PORT || 3000)
 
   const rule = new schedule.RecurrenceRule()
-  rule.dayOfWeek = 3
-  rule.hour = 17
-  rule.minute = 13
+  rule.dayOfWeek = 2
+  rule.hour = 13
+  rule.minute = 1
   rule.tz = "UTC+01:00"
 
   const job = schedule.scheduleJob(rule, async () => {
