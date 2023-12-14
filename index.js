@@ -114,7 +114,7 @@ console.log(randomDiscussion.discussionName)
   rule.tz = "UTC+01:00"
 
   const ruleQuotes = new schedule.RecurrenceRule()
-  rule.dayOfWeek = [1, 2, 3, 4, 5]
+  rule.dayOfWeek = [5, new schedule.Range(1, 4)]
   rule.hour = 17
   rule.minute = 43
   rule.tz = "UTC+01:00"
@@ -136,7 +136,7 @@ console.log(randomDiscussion.discussionName)
       const author = resp.data.author
       app.client.chat.postMessage({
         channel: "#random",
-        text: `Hey everyone <!channel>, How is it going. :blush:  What are your agenda for today? :technologist:  \n\n Quote of the day .\n\n*${quote}* by _${author}_ \n\n let's get to work :man-catwheeling: :woman-catwheeling :nerd-face: `,
+        text: `Hey everyone <!channel>, How is it going. :blush:  What are your agenda for today? :technologist:  \n\n Quote of the day .\n\n*${quote}* by _${author}_ \n\nLet's get to work :man-catwheeling: :woman-catwheeling: :nerd-face: `,
       })
     } catch (error) {
       console.log("schedule error: " + error)
