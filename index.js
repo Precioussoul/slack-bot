@@ -116,7 +116,7 @@ console.log(randomDiscussion.discussionName)
   const ruleQuotes = new schedule.RecurrenceRule()
   ruleQuotes.dayOfWeek = [0, new schedule.Range(1, 6)]
   ruleQuotes.hour = 18
-  ruleQuotes.minute = 42
+  ruleQuotes.minute = 46
   ruleQuotes.tz = "UTC+01:00"
 
   const job = schedule.scheduleJob(rule, () => {
@@ -140,7 +140,7 @@ console.log(randomDiscussion.discussionName)
         const author = resp.data.author
         app.client.chat.postMessage({
           channel: "#random",
-          text: `Hey everyone <!channel>, How is it going. :blush:  What are your agenda for today? :technologist:  \n\n Quote of the day .\n\n*${quote}* by _${author}_ \n\nLet's get to work  🤸 🤸 🤓 `,
+          text: `Hey everyone <!channel>, How is it going. :blush:  What are your agenda for today? :technologist:  \n\n*Quote of the day* .\n\n>*${quote}* by _${author}_ \n\nLet's get to work  🤸 🤸 🤓 `,
         })
       } catch (error) {
         console.log("schedule error: " + error)
