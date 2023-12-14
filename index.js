@@ -114,33 +114,38 @@ console.log(randomDiscussion.discussionName)
   rule.tz = "UTC+01:00"
 
   const ruleQuotes = new schedule.RecurrenceRule()
-  rule.dayOfWeek = [5, new schedule.Range(1, 4)]
-  rule.hour = 17
-  rule.minute = 43
+  rule.dayOfWeek = [0, new schedule.Range(1, 6)]
+  rule.hour = 18
+  rule.minute = 26
   rule.tz = "UTC+01:00"
 
-  const job = schedule.scheduleJob(rule, async () => {
-    try {
-      app.client.chat.postMessage({
-        channel: "#random",
-        text: `Hey everyone <!channel>, How is it going. :blush:  Its Another TechTuesday :technologist: :tada: \n\nLet give our input to the discussion below and have a nice engagement.\n\n*${randomDiscussion.discussionName}* \n\nLet's go :rocket: :rocket:  `,
-      })
-    } catch (error) {
-      console.log("schedule error: " + error)
-    }
+  const job = schedule.scheduleJob(rule, () => {
+    ;(async () => {
+      try {
+        app.client.chat.postMessage({
+          channel: "#random",
+          text: `Hey everyone <!channel>, How is it going. :blush:  Its Another TechTuesday :technologist: :tada: \n\nLet give our input to the discussion below and have a nice engagement.\n\n*${randomDiscussion.discussionName}* \n\nLet's go :rocket: :rocket:  `,
+        })
+      } catch (error) {
+        console.log("schedule error: " + error)
+      }
+    })()
   })
-  const jobQuotes = schedule.scheduleJob(ruleQuotes, async () => {
-    try {
-      let resp = await axios.get(`https://api.quotable.io/random`)
-      const quote = resp.data.content
-      const author = resp.data.author
-      app.client.chat.postMessage({
-        channel: "#random",
-        text: `Hey everyone <!channel>, How is it going. :blush:  What are your agenda for today? :technologist:  \n\n Quote of the day .\n\n*${quote}* by _${author}_ \n\nLet's get to work :man-catwheeling: :woman-catwheeling: :nerd-face: `,
-      })
-    } catch (error) {
-      console.log("schedule error: " + error)
-    }
+
+  const jobQuotes = schedule.scheduleJob(ruleQuotes, () => {
+    ;(async () => {
+      try {
+        let resp = await axios.get(`https://api.quotable.io/random`)
+        const quote = resp.data.content
+        const author = resp.data.author
+        app.client.chat.postMessage({
+          channel: "#random",
+          text: `Hey everyone <!channel>, How is it going. :blush:  What are your agenda for today? :technologist:  \n\n Quote of the day .\n\n*${quote}* by _${author}_ \n\nLet's get to work  🤸 🤸 🤓 `,
+        })
+      } catch (error) {
+        console.log("schedule error: " + error)
+      }
+    })()
   })
 
   // Listen for an event from the Events API
