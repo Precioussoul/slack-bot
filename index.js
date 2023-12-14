@@ -108,9 +108,9 @@ console.log(randomDiscussion.discussionName)
   await app.start(process.env.PORT || 3000)
 
   const rule = new schedule.RecurrenceRule()
-  rule.dayOfWeek = 4
-  rule.hour = 14
-  rule.minute = 5
+  rule.dayOfWeek = 2
+  rule.hour = 13
+  rule.minute = 0
   rule.tz = "UTC+01:00"
 
   const job = schedule.scheduleJob(rule, async () => {
