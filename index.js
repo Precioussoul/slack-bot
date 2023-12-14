@@ -116,7 +116,7 @@ console.log(randomDiscussion.discussionName)
   const ruleQuotes = new schedule.RecurrenceRule()
   ruleQuotes.dayOfWeek = [0, new schedule.Range(1, 6)]
   ruleQuotes.hour = 18
-  ruleQuotes.minute = 46
+  ruleQuotes.minute = 47
   ruleQuotes.tz = "UTC+01:00"
 
   const job = schedule.scheduleJob(rule, () => {
