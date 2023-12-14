@@ -110,14 +110,14 @@ console.log(randomDiscussion.discussionName)
   const rule = new schedule.RecurrenceRule()
   rule.dayOfWeek = 4
   rule.hour = 13
-  rule.minute = 45
+  rule.minute = 52
   rule.tz = "UTC+01:00"
 
   const job = schedule.scheduleJob(rule, async () => {
     try {
       app.client.chat.postMessage({
         channel: "#random",
-        text: `Hello <@#random>, Its Another TechTuesday :technologist: \n  Let give our input to the discussion below and have a nice engagement. \n \n  *${randomDiscussion}*   `,
+        text: `Hello <!channel>, Its Another TechTuesday :technologist: \n  Let give our input to the discussion below and have a nice engagement. \n \n  *${randomDiscussion.discussionName}*   `,
       })
     } catch (error) {
       console.log("schedule error: " + error)
