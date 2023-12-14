@@ -113,11 +113,30 @@ console.log(randomDiscussion.discussionName)
   rule.minute = 0
   rule.tz = "UTC+01:00"
 
+  const ruleQuotes = new schedule.RecurrenceRule()
+  rule.dayOfWeek = [1, 2, 3, 4, 5]
+  rule.hour = 17
+  rule.minute = 43
+  rule.tz = "UTC+01:00"
+
   const job = schedule.scheduleJob(rule, async () => {
     try {
       app.client.chat.postMessage({
         channel: "#random",
         text: `Hey everyone <!channel>, How is it going. :blush:  Its Another TechTuesday :technologist: :tada: \n\nLet give our input to the discussion below and have a nice engagement.\n\n*${randomDiscussion.discussionName}* \n\nLet's go :rocket: :rocket:  `,
+      })
+    } catch (error) {
+      console.log("schedule error: " + error)
+    }
+  })
+  const jobQuotes = schedule.scheduleJob(ruleQuotes, async () => {
+    try {
+      let resp = await axios.get(`https://api.quotable.io/random`)
+      const quote = resp.data.content
+      const author = resp.data.author
+      app.client.chat.postMessage({
+        channel: "#random",
+        text: `Hey everyone <!channel>, How is it going. :blush:  What are your agenda for today? :technologist:  \n\n Quote of the day .\n\n*${quote}* by _${author}_ \n\n let's get to work :man-catwheeling: :woman-catwheeling :nerd-face: `,
       })
     } catch (error) {
       console.log("schedule error: " + error)
