@@ -96,22 +96,10 @@ const randomDiscussion = getRandomDiscussion()
 console.log("Random Tech Discussion:")
 console.log(randomDiscussion.discussionName)
 
-// const rule = new schedule.RecurrenceRule()
-// rule.dayOfWeek = 2
-// rule.hour = 13
-// rule.minute = 42
-// rule.tz = "UTC+01:00"
-
 /* Add functionality here */
 ;(async () => {
   // Start the app
   await app.start(process.env.PORT || 3000)
-
-  const ruleQuotes = new schedule.RecurrenceRule()
-  ruleQuotes.dayOfWeek = [0, 1, 2, 3, 4, 5, 6]
-  ruleQuotes.hour = 13
-  ruleQuotes.minute = 20
-  ruleQuotes.tz = "UTC+01:00"
 
   const job = schedule.scheduleJob(
     {hour: 13, minute: 1, dayOfWeek: 2, tz: "UTC+01:00"},
@@ -131,7 +119,7 @@ console.log(randomDiscussion.discussionName)
   )
 
   const jobQuotes = schedule.scheduleJob(
-    {hour: 13, minute: 42, tz: "UTC+01:00"},
+    {hour: 13, minute: 0, tz: "UTC+01:00"},
     function () {
       ;(async () => {
         try {
