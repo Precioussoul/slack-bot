@@ -130,24 +130,21 @@ console.log(randomDiscussion.discussionName)
     }
   )
 
-  const jobQuotes = schedule.scheduleJob(
-    {hour: 13, minute: 30, dayOfWeek: [0, 1, 2, 3, 4, 5, 6]},
-    function () {
-      ;(async () => {
-        try {
-          let resp = await axios.get(`https://api.quotable.io/random`)
-          const quote = resp.data.content
-          const author = resp.data.author
-          app.client.chat.postMessage({
-            channel: "#random",
-            text: `Hey everyone <!channel>, How is it going. :blush:  What are your agenda for today? :technologist:  \n\n*Quote of the day* .\n\n>*${quote}* by _${author}_ \n\n*Let's get to work*  🤸 🤸 🤓. `,
-          })
-        } catch (error) {
-          console.log("schedule error: " + error)
-        }
-      })()
-    }
-  )
+  const jobQuotes = schedule.scheduleJob({hour: 13, minute: 42}, function () {
+    ;(async () => {
+      try {
+        let resp = await axios.get(`https://api.quotable.io/random`)
+        const quote = resp.data.content
+        const author = resp.data.author
+        app.client.chat.postMessage({
+          channel: "#random",
+          text: `Hey everyone <!channel>, How is it going. :blush:  What are your agenda for today? :technologist:  \n\n*Quote of the day* .\n\n>*${quote}* by _${author}_ \n\n*Let's get to work*  🤸 🤸 🤓. `,
+        })
+      } catch (error) {
+        console.log("schedule error: " + error)
+      }
+    })()
+  })
 
   // Listen for an event from the Events API
   app.event("app_home_opened", ({event, say}) => {
