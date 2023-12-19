@@ -108,7 +108,7 @@ console.log(randomDiscussion.discussionName)
       ;(async () => {
         try {
           app.client.chat.postMessage({
-            channel: "#random",
+            channel: "random",
             text: `Hey everyone <!channel>, How is it going. :blush:  Its Another TechTuesday :technologist: :tada: \n\nLet give our input to the discussion below and have a nice engagement.\n\n*${randomDiscussion.discussionName}* \n\nLet's go :rocket: :rocket:  `,
           })
         } catch (error) {
@@ -127,7 +127,7 @@ console.log(randomDiscussion.discussionName)
           const quote = resp.data.content
           const author = resp.data.author
           app.client.chat.postMessage({
-            channel: "#random",
+            channel: "random",
             text: `Hey everyone <!channel>, How is it going. :blush:  What are your agenda for today? :technologist:  \n\n*Quote of the day* .\n\n>*${quote}* by _${author}_ \n\n*Let's get to work*  🤸 🤸 🤓. `,
           })
         } catch (error) {
